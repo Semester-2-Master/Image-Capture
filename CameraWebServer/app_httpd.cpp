@@ -69,7 +69,7 @@
 #endif
 
 // Enable LED FLASH setting
-#define CONFIG_LED_ILLUMINATOR_ENABLED 1
+#define CONFIG_LED_ILLUMINATOR_ENABLED 0
 
 // LED FLASH setup
 #if CONFIG_LED_ILLUMINATOR_ENABLED
@@ -293,6 +293,14 @@ void enable_led(bool en)
 }
 #endif
 
+
+// Ours
+esp_err_t continous_handler(httpd_req_t *req) {
+    const char* response = "Hello, world!";
+    httpd_resp_send(req, response, strlen(response));
+    return ESP_OK;
+}
+
 static esp_err_t bmp_handler(httpd_req_t *req)
 {
     camera_fb_t *fb = NULL;
@@ -334,6 +342,7 @@ static esp_err_t bmp_handler(httpd_req_t *req)
     log_i("BMP: %llums, %uB", (uint64_t)((fr_end - fr_start) / 1000), buf_len);
     return res;
 }
+
 
 static size_t jpg_encode_stream(void *arg, size_t index, const void *data, size_t len)
 {
@@ -1285,6 +1294,20 @@ void startCameraServer()
 #endif
     };
 
+    // NEW
+     httpd_uri_t continous_images = {
+        .uri = "/cont",
+        .method = HTTP_GET,
+        .handler = continous_handler,
+        .user_ctx = NULL
+#ifdef CONFIG_HTTPD_WS_SUPPORT
+        ,
+        .is_websocket = true,
+        .handle_ws_control_frames = false,
+        .supported_subprotocol = NULL
+#endif
+    };
+
     httpd_uri_t xclk_uri = {
         .uri = "/xclk",
         .method = HTTP_GET,
@@ -1366,6 +1389,7 @@ void startCameraServer()
         httpd_register_uri_handler(camera_httpd, &status_uri);
         httpd_register_uri_handler(camera_httpd, &capture_uri);
         httpd_register_uri_handler(camera_httpd, &bmp_uri);
+        httpd_register_uri_handler(camera_httpd, &continous_images);
 
         httpd_register_uri_handler(camera_httpd, &xclk_uri);
         httpd_register_uri_handler(camera_httpd, &reg_uri);

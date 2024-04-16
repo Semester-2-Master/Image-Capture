@@ -136,6 +136,7 @@ void setup() {
 }
 
 void loop() {
-  // Do nothing. Everything is done in another task by the web server
+  
+  Serial.println("im the loop");
   delay(10000);
 }
