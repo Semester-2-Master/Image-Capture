@@ -14,6 +14,7 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <WiFiAP.h>
+#include "esp_http_server.h"
 
 #define LED_BUILTIN 2   // Set the GPIO pin where you connected your test LED or comment this line out if your dev board has a built-in LED
 
@@ -139,7 +140,6 @@ void setup() {
 
   Serial.println("Server started");
 }
-
 void loop() {
   WiFiClient client = server.available();   // listen for incoming clients
 
@@ -162,8 +162,8 @@ void loop() {
             client.println();
 
             // the content of the HTTP response follows the header:
-            client.print("Click <a href=\"/H\">here</a> to turn ON the LED.<br>");
-            client.print("Click <a href=\"/L\">here</a> to turn OFF the LED.<br>");
+            client.print("Click <a href=\"/H\">here</a> to Download All Pictures.<br>");
+            client.print("Click <a href=\"/L\">here</a> to Take Picture.<br>");
 
             // The HTTP response ends with another blank line:
             client.println();
@@ -178,7 +178,7 @@ void loop() {
 
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /H")) {
-          digitalWrite(LED_BUILTIN, HIGH);               // GET /H turns the LED on
+            download(client); // Pass the client object to the download function
         }
         if (currentLine.endsWith("GET /L")) {
           capture();               // GET /L turns the LED off
@@ -223,3 +223,27 @@ void capture (){
   esp_camera_fb_return(fb); 
 
 }
+void download(WiFiClient client) {
+  // Open the file from the SD card
+  File file = SD_MMC.open("/picture1.jpg"); // Change the path to the file you want to download
+  
+  // Check if the file exists
+  if (!file) {
+    Serial.println("Failed to open file for reading");
+    return;
+  }
+
+  // Send HTTP headers
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-Disposition: attachment; filename=\"picture.jpg\"");
+  client.println("Content-type: image/jpeg");
+  client.println("Connection: close");
+  client.println();
+
+  // Send file contents
+  while (file.available()) {
+    client.write(file.read());
+  }
+  file.close();
+}
+
