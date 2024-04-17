@@ -1,7 +1,10 @@
+#include <Arduino.h>
 #include "esp_camera.h"
 #include "camera_pins.h"
 
 void init_camera() {
+  Serial.println("Initializing camera");
+
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
   config.ledc_timer = LEDC_TIMER_0;
@@ -24,14 +27,15 @@ void init_camera() {
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG; //YUV422,GRAYSCALE,RGB565,JPEG
   config.frame_size = FRAMESIZE_UXGA; // FRAMESIZE_ + QVGA|CIF|VGA|SVGA|XGA|SXGA|UXGA
-  config.grab_mode = CAMERA_GRAB_WHEN_EMPTY;
+  config.grab_mode = CAMERA_GRAB_LATEST;
   config.fb_location = CAMERA_FB_IN_PSRAM;
-  config.jpeg_quality = 0; //0-63, lower number means higher quality
+  config.jpeg_quality = 10; //0-63, lower number means higher quality
   config.fb_count = 1;
   
   // Init Camera
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
+    Serial.println("Camera init error");
     return;
   }
 
@@ -41,7 +45,11 @@ void init_camera() {
   s->set_saturation(s, -2); // lower the saturation
 
   // Read out first frame to avoid saving a green picture
+  delay(500);
   camera_fb_t * fb = NULL;
   fb = esp_camera_fb_get();
   esp_camera_fb_return(fb);
+  delay(500);
+
+  Serial.println("Camera init success");
 }

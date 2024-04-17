@@ -11,6 +11,7 @@ void test_sd() {
 }
 
 void test_camera() {
+  Serial.println("test_camera");
   camera_fb_t * fb = NULL;
   char *filename = "/picture.jpg";
   
@@ -23,9 +24,14 @@ void test_camera() {
 
   write_file(filename, fb->buf, fb->len);
   esp_camera_fb_return(fb);
+
+  Serial.println("Camera capture success");
 }
 
 void setup() {
+  Serial.begin(115200);
+  Serial.setDebugOutput(true);
+
   init_sd();
   init_camera();
 
@@ -33,7 +39,6 @@ void setup() {
   //test_sd();
 
   // test camera and save picture to SD card
-  delay(100);
   test_camera();
 }
 
