@@ -2,6 +2,7 @@
 
 #include "sd.h"
 #include "camera.h"
+#include "wifi_ap.h"
 
 void test_sd() {
   char *filename = "/test2.txt";
@@ -34,6 +35,7 @@ void setup() {
 
   init_sd();
   init_camera();
+  init_wifi();
 
   // test SD card access
   //test_sd();
