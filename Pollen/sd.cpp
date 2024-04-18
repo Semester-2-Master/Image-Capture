@@ -27,6 +27,22 @@ void write_file(char *filename, uint8_t *buf, int len) {
   file.close();
 }
 
+void readFile(fs::FS &fs, const char *path, File *filePointer) {
+    Serial.printf("Reading file: %s\n", path);
+
+    *filePointer = fs.open(path);
+    if (!(*filePointer)) {
+        Serial.println("Failed to open file for reading");
+        return;
+    }
+
+    // Serial.print("Read from file: ");
+    // while ((*filePointer).available()) {
+    //     Serial.write((*filePointer).read());
+    // }
+}
+
+
 void print_card(char ***file_list, int *count) {
   Serial.println("print_card");
   *file_list = (char **)malloc(MAXFILES * sizeof(char *));

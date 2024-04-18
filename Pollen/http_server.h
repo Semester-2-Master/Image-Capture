@@ -6,4 +6,5 @@ class PollenServer {
     WebServer* getServer();
     void printDirectory();
     void printMessage();
+    void serveImg();
 };

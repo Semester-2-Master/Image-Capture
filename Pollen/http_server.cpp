@@ -20,6 +20,29 @@ class PollenServer {
 
       server->send(200, "text/plain", file_list[3]);
     }
+
+  static void serveImg() {
+    Serial.println("ServeIMG here");
+    File myFile;
+    readFile(SD_MMC, "/hair.jpg", &myFile);
+
+    if (!myFile) {
+        server->send(500, "text/plain", "Failed to open file for reading");
+        return;
+    }
+
+    server->setContentLength(myFile.size()); 
+    server->sendHeader("Content-Type", "image/jpeg"); 
+    server->send(200, "application/octet-stream"); 
+
+    // ridiculously slow
+    while (myFile.available()) {
+        server->client().write(myFile.read());
+    }
+
+    myFile.close(); 
+}
+
 };
 
 void PollenServer::init() {
@@ -27,6 +50,8 @@ void PollenServer::init() {
   server = new WebServer(80);
   server->on("/", HTTP_GET, PollenServer::printDirectory);
   server->on("/msg", HTTP_GET, PollenServer::printMessage);
+  server->on("/png", HTTP_GET, PollenServer::serveImg);
+
   server->begin();
   Serial.println("Web server init done");
 }

@@ -47,19 +47,23 @@ void setup() {
   //test_sd();
 
   // test camera and save picture to SD card
-  test_camera();
+  //test_camera();
 
-  char **file_list = NULL;
-  int count = 0;
-  print_card(&file_list, &count);
 
-  Serial.print("Count: ");
-  Serial.println(count);
 
-  for (int i = 0; i < count; i++) {
-    Serial.print("File: ");
-    Serial.println(file_list[i]);
-  }
+  
+
+  // char **file_list = NULL;
+  // int count = 0;
+  // print_card(&file_list, &count);
+
+  // Serial.print("Count: ");
+  // Serial.println(count);
+
+  // for (int i = 0; i < count; i++) {
+  //   Serial.print("File: ");
+  //   Serial.println(file_list[i]);
+  // }
 }
 
 void loop() {
