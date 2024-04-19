@@ -17,7 +17,7 @@ void test_sd() {
 void test_camera() {
   Serial.println("test_camera");
   camera_fb_t * fb = NULL;
-  char *filename = "/picture.jpg";
+  char *filename = "/hair.jpg";
   
   fb = esp_camera_fb_get();
 
