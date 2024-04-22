@@ -36,9 +36,9 @@ void setup() {
   Serial.begin(115200);
   Serial.setDebugOutput(true);
 
+  init_wifi();
   init_sd();
   init_camera();
-  init_wifi();
 
   // Initialize web server
   ps.init();
@@ -67,5 +67,4 @@ void setup() {
 }
 
 void loop() {
-  ps.getServer()->handleClient();
 }
