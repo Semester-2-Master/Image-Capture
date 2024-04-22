@@ -49,7 +49,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t* payload, size_t length)
 void setup() {
   Serial.begin(115200);
   initCamera();
-  WiFi.begin("DZL_NET2", "dzlandvanessa");
+  WiFi.begin("POCO M4 Pro 5G", "bruh12345");
 }
 
 int frameNo = 0;

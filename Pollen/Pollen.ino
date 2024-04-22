@@ -3,9 +3,8 @@
 #include "sd.h"
 #include "camera.h"
 #include "wifi_ap.h"
-#include "http_server.h"
+#include "web_socket.h"
 
-PollenServer ps;
 
 void test_sd() {
   char *filename = "/test2.txt";
@@ -39,9 +38,9 @@ void setup() {
   init_sd();
   init_camera();
   init_wifi();
-
+  init_socket();
   // Initialize web server
-  ps.init();
+
 
   // test SD card access
   //test_sd();
@@ -67,5 +66,5 @@ void setup() {
 }
 
 void loop() {
-  ps.getServer()->handleClient();
+  webSocket.loop();
 }

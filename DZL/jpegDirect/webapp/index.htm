@@ -9,8 +9,8 @@
 <img id="img"></body>
 
 <script>
-    var ip = "10.20.85.158";
-	socket=new WebSocket("ws://"+ip+":81");
+    var ip = "192.168.4.1";
+	socket=new WebSocket("ws://"+ip);
 	socket.binaryType="blob";
 	socket.onmessage=(msg)=>{
 		var blob=msg.data;
