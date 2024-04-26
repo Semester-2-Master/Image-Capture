@@ -1,25 +1,16 @@
 #include <Arduino.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include "SD_MMC.h"
 #include "esp_camera.h"
 
 AsyncWebServer server(80);
 camera_fb_t * fb = nullptr;
 
-class PollenServer {
-  public:
-    void init();
-};
-
-void PollenServer::init() {
+void init_server() {
   Serial.println("Web server init");
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SD_MMC, "/hair.jpg", "image/jpeg");
-  });
-
-  server.on("/capture", HTTP_GET, [](AsyncWebServerRequest *request) {
+ 
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     Serial.println("request begin");
 
     fb = esp_camera_fb_get();
@@ -49,7 +40,6 @@ void PollenServer::init() {
     Serial.println("request end");
   });
 
-  server.serveStatic("/", SD_MMC, "/");
 
   server.begin();
 

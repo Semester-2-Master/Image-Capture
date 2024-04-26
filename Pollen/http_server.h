@@ -1,4 +1,1 @@
-class PollenServer {
-  public:
-    void init();
-};
+void init_server();
