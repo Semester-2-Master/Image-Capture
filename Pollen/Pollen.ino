@@ -3,8 +3,8 @@
 #include "camera.h"
 #include "wifi_client.h"
 #include "http_server.h"
-
-
+#include "time.h"
+#include "time_config.h"
 
 
 
@@ -25,6 +25,7 @@ void test_camera() {
   Serial.println("Camera capture success");
 }
 
+
 void setup() {
   Serial.begin(115200);
   Serial.setDebugOutput(true);
@@ -32,6 +33,10 @@ void setup() {
   init_wifi();
   init_camera();
   init_server();
+
+  //time
+  init_time();
+  
   
 }
 
