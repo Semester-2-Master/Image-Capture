@@ -2,6 +2,7 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include "esp_camera.h"
+#include "time_config.h"
 
 AsyncWebServer server(80);
 camera_fb_t * fb = nullptr;
@@ -35,6 +36,14 @@ void init_server() {
       return len;
     });
 
+    const size_t maxTimeBufferSize = 30; // Maximum size for the time string buffer
+    char timeBuffer[maxTimeBufferSize]; // Buffer to hold the formatted time string
+    // Obtain the current time and store it in the time buffer
+    get_time(timeBuffer, maxTimeBufferSize);
+      // Construct the filename with the time string
+    String filename = String(timeBuffer) + ".jpg";
+    
+    response->addHeader("Content-Disposition", "inline; filename=" + filename);
     request->send(response);
 
     Serial.println("request end");

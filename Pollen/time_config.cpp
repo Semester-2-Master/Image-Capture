@@ -16,10 +16,26 @@ void printLocalTime(){
   Serial.println(&timeinfo, "%A, %B %d %Y %H:%M:%S");
 }
 
+void get_time(char* timeBuffer, size_t bufferSize) {
+  struct tm timeinfo;
+  
+  if (!getLocalTime(&timeinfo)) {
+    Serial.println("Failed to obtain time");
+    if (timeBuffer != nullptr && bufferSize > 0) {
+      timeBuffer[0] = '\0'; // Set empty string if time retrieval fails
+    }
+    return;
+  }
+
+  // Format the time into the provided buffer
+  strftime(timeBuffer, bufferSize, "%B: %d-%Y %H:%M:%S", &timeinfo);
+}
+
 void init_time() {
-  Serial.println("time initt");
+  Serial.println("time init");
 
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
-  printLocalTime();
+  //printLocalTime();
+  Serial.println("time init done");
 }
 

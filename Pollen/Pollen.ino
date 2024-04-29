@@ -8,22 +8,22 @@
 
 
 
-void test_camera() {
-  Serial.println("test_camera");
-  camera_fb_t * fb = NULL;
+// void test_camera() {
+//   Serial.println("test_camera");
+//   camera_fb_t * fb = NULL;
   
-  fb = esp_camera_fb_get();
+//   fb = esp_camera_fb_get();
 
-  if(!fb) {
-    Serial.println("Camera capture failed");
-    return;
-  }
-  //change to send file through wifi
-  //write_file(filename, fb->buf, fb->len);
-  esp_camera_fb_return(fb);
+//   if(!fb) {
+//     Serial.println("Camera capture failed");
+//     return;
+//   }
+//   //change to send file through wifi
+//   //write_file(filename, fb->buf, fb->len);
+//   esp_camera_fb_return(fb);
 
-  Serial.println("Camera capture success");
-}
+//   Serial.println("Camera capture success");
+// }
 
 
 void setup() {
