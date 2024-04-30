@@ -2,6 +2,7 @@
 #include "camera.h"
 #include "wifi_client.h"
 #include "http_server.h"
+#include "http_client.h"
 #include "time.h"
 #include "time_config.h"
 
@@ -14,6 +15,8 @@ void setup() {
   init_server();
   init_time();
   
+  delay(5000);
+  post_picture();
 }
 
 void loop() {
