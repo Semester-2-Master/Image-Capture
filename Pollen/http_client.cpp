@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include "esp_camera.h"
+#include "time_config.h"
 
 String serverName = "192.168.1.142";
 int port = 5194;
@@ -17,7 +18,14 @@ void post_picture() {
         return;
       }
 
-      String head = "--RandomNerdTutorials\r\nContent-Disposition: form-data; name=\"file\"; filename=\"esp32-cam.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
+      const size_t maxTimeBufferSize = 30; // Maximum size for the time string buffer
+      char timeBuffer[maxTimeBufferSize]; // Buffer to hold the formatted time string
+    //   Obtain the current time and store it in the time buffer
+      get_time(timeBuffer, maxTimeBufferSize);
+      // Construct the filename with the time string
+      String filename = String(timeBuffer) + ".jpg";
+
+      String head = "--RandomNerdTutorials\r\nContent-Disposition: form-data; name=\"file\"; filename=\""+filename+"\"\r\nContent-Type: image/jpeg\r\n\r\n";
       String tail = "\r\n--RandomNerdTutorials--\r\n";
       size_t imageLen = fb->len;
       size_t extraLen = head.length() + tail.length();
@@ -29,13 +37,11 @@ void post_picture() {
       client.println("Content-Type: multipart/form-data; boundary=RandomNerdTutorials");
       client.println("Content-Length: " + String(totalLen));
       client.println();
-      
+
       // Send image data
-      Serial.println("Uploading image");
       client.print(head);
       client.write(fb->buf, fb->len);
       client.print(tail);
-      Serial.println("Uploading image done");
 
       // Wait for response
       delay(10); // Allow time for server to process

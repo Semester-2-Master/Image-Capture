@@ -28,7 +28,7 @@ void get_time(char* timeBuffer, size_t bufferSize) {
   }
 
   // Format the time into the provided buffer
-  strftime(timeBuffer, bufferSize, "%B: %d-%Y %H:%M:%S", &timeinfo);
+  strftime(timeBuffer, bufferSize, "%B_%d-%Y %H-%M-%S", &timeinfo);
 }
 
 void init_time() {

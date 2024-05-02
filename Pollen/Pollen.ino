@@ -13,7 +13,7 @@ void setup() {
   init_wifi();
   init_camera();
   //init_server();
-  //init_time();
+  init_time();
   
   delay(5000);
   post_picture();
