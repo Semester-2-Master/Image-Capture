@@ -16,8 +16,11 @@ void setup() {
   init_time();
   
   delay(5000);
-  post_picture();
+ 
 }
 
 void loop() {
+
+  post_picture();
+  delay(30000);
 }

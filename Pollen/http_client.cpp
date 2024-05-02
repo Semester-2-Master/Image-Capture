@@ -53,6 +53,7 @@ void post_picture() {
       // Clean up
       client.stop();
       esp_camera_fb_return(fb);
+      Serial.println(filename+": Sent");
     } else {
       Serial.println("Connection failed!");
     }
