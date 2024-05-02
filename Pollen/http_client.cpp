@@ -4,7 +4,7 @@
 
 String serverName = "192.168.1.142";
 int port = 5194;
-String serverPath = "/Image";
+String serverPath = "/Image/upload";
 WiFiClient client;
 
 void post_picture() {

@@ -22,5 +22,5 @@ void setup() {
 void loop() {
 
   post_picture();
-  delay(30000);
+  delay(5000);
 }
