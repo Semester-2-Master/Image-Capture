@@ -3,8 +3,8 @@
 #include "wifi_client.h"
 //#include "http_server.h"
 #include "http_client.h"
-#include "time.h"
-#include "time_config.h"
+// #include "time.h"
+// #include "time_config.h"
 
 void setup() {
   Serial.begin(115200);
@@ -13,11 +13,11 @@ void setup() {
   init_wifi();
   init_camera();
   //init_server();
-  init_time();
-  
-  delay(5000);
-  post_picture();
+  // init_time();
+  init_client();
 }
 
 void loop() {
+  sendRequest();
+  delay(5000);
 }
