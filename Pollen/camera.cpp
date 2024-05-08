@@ -26,11 +26,11 @@ void init_camera() {
   config.pin_reset = RESET_GPIO_NUM;
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG; //YUV422,GRAYSCALE,RGB565,JPEG
-  config.frame_size = FRAMESIZE_UXGA; // FRAMESIZE_ + QVGA|CIF|VGA|SVGA|XGA|SXGA|UXGA
+  config.frame_size = FRAMESIZE_XGA; // FRAMESIZE_ + QVGA|CIF|VGA|SVGA|XGA|SXGA|UXGA
   config.grab_mode = CAMERA_GRAB_LATEST;
   config.fb_location = CAMERA_FB_IN_PSRAM;
   config.jpeg_quality = 10; //0-63, lower number means higher quality
-  config.fb_count = 1;
+  config.fb_count = 2;
   
   // Init Camera
   esp_err_t err = esp_camera_init(&config);
@@ -39,15 +39,14 @@ void init_camera() {
     return;
   }
 
-  sensor_t * s = esp_camera_sensor_get();
-  s->set_vflip(s, 1); // flip it back
-  s->set_brightness(s, 1); // up the brightness just a bit
-  s->set_saturation(s, -2); // lower the saturation
+  sensor_t *s = esp_camera_sensor_get();
+  s->set_vflip(s, 1);
+  s->set_hmirror(s, 1);
+  // s->set_brightness(s, 1);
+  // s->set_saturation(s, -2);
 
   // Read out first frame to avoid saving a green picture
-  delay(500);
-  camera_fb_t * fb = NULL;
-  fb = esp_camera_fb_get();
+  camera_fb_t *fb = esp_camera_fb_get();
   esp_camera_fb_return(fb);
   delay(500);
 
