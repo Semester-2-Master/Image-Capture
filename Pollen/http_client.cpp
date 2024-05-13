@@ -2,8 +2,8 @@
 #include "esp_camera.h"
 #include "time_config.h"
 
-String serverName = "192.168.1.142";
-int port = 5194;
+String serverName = "pollen-backend.azurewebsites.net";
+int port = 80;
 String serverPath = "/Image/upload";
 WiFiClient client;
 
