@@ -2,7 +2,7 @@
 #include "esp_camera.h"
 #include "camera_pins.h"
 
-void init_camera() {
+  void init_camera() {
   Serial.println("Initializing camera");
 
   camera_config_t config;

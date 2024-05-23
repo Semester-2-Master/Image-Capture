@@ -21,9 +21,9 @@
 // ===========================
 // Enter your WiFi credentials
 // ===========================
-const char* ssid = "POCO M4 Pro 5G";
-const char* password = "bruh12345";
 
+const char* ssid     = "POCO M4 Pro 5G";
+const char* password = "bruh12345";
 void startCameraServer();
 void setupLedFlash(int pin);
 
