@@ -13,11 +13,10 @@ void setup() {
 
   init_wifi();
   init_camera();
- 
+  init_motor();
   init_time();
   
   delay(5000);
-      //init_motor();
 
   post_picture();
   delay(2000);

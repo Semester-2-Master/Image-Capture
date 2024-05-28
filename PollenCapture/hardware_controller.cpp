@@ -1,14 +1,18 @@
 #include <ESP32Servo.h>
 
 Servo myservo;
-int pos = 0;
-int run_time = 500;
+int run_time = 400;
+
+void init_motor() {
+  myservo.attach(13);
+}
 
 void motor_step() {
-    Serial.println("Stepping motor");
-    myservo.attach(13);
-    myservo.write(0);
-    delay(run_time); 
-    myservo.detach();
-
+  Serial.println("Stepping motor");
+  for (int pos = 85; pos >= 60; pos -= 5) {
+    myservo.write(pos);
+    delay(100);
+  }
+  delay(run_time);
+  myservo.write(90);
 }
