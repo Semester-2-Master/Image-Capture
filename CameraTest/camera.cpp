@@ -49,11 +49,11 @@
   // s->set_awb_gain(s, 1);
   // s->set_wb_mode(s, 3);   //maybe change?
   s->set_exposure_ctrl(s, 1); // Disable exposure control
-  s->set_ae_level(s, 0); // Set AE level to 0
-  s->set_aec_value(s, 100); // Set AEC value to 0
+  s->set_ae_level(s, -2); // Set AE level to 0
+  s->set_aec_value(s, 10); // Set AEC value to 0
   s->set_aec2(s, 0); // Disable additional auto exposure control
-  // s->set_gain_ctrl(s, 0); // Disable gain control
-  // s->set_agc_gain(s, 0); // Set AGC gain to 0
+  s->set_gain_ctrl(s, 1); // Disable gain control
+  s->set_agc_gain(s, 0); // Set AGC gain to 0
   // s->set_lenc(s, 0); // Disable lens correction
   // s->set_raw_gma(s, 1); // Disable RAW gamma correction
   // s->set_bpc(s, 1); // Disable black pixel correction
