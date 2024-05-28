@@ -41,8 +41,25 @@
 
   sensor_t * s = esp_camera_sensor_get();
   s->set_vflip(s, 1); // flip it back
-  s->set_brightness(s, 1); // up the brightness just a bit
-  s->set_saturation(s, -2); // lower the saturation
+ // s->set_brightness(s, 1); // up the brightness just a bit
+ // s->set_saturation(s, -2); // lower the saturation
+ 
+  s->set_wb_mode(s, 2);   //maybe change?
+    
+  s->set_awb_gain(s, 0); // Disable AWB gain
+  s->set_whitebal(s, 0); // Disable white balance
+  s->set_gain_ctrl(s, 0); // Disable gain control
+  s->set_agc_gain(s, 0); // Set AGC gain to 0
+  s->set_exposure_ctrl(s, 0); // Disable exposure control
+  s->set_aec2(s, 0); // Disable additional auto exposure control
+  s->set_ae_level(s, 0); // Set AE level to 0
+  s->set_aec_value(s, 0); // Set AEC value to 0
+  s->set_lenc(s, 0); // Disable lens correction
+  s->set_raw_gma(s, 0); // Disable RAW gamma correction
+  s->set_bpc(s, 1); // Disable black pixel correction
+  s->set_wpc(s, 1); // Disable white pixel correction
+
+
 
   // Read out first frame to avoid saving a green picture
   delay(500);

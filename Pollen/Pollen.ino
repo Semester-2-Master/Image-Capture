@@ -19,6 +19,20 @@ void setup() {
   delay(5000);
       //init_motor();
 
+  post_picture();
+  delay(2000);
+  motor_step();
+  delay(30000);
+
+    post_picture();
+  delay(2000);
+  motor_step();
+  delay(30000);
+  
+    post_picture();
+  delay(2000);
+  motor_step();
+  delay(30000);
 
 }
 
@@ -27,10 +41,10 @@ void loop() {
   post_picture();
   delay(2000);
   motor_step();
- 
+ // delay(30000);
  
 
-  delay(900000);
+  delay(1800000);
 
   //delay(30000);
 }
