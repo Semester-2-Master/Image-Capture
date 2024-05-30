@@ -7,7 +7,7 @@ int port = 80;
 String serverPath = "/image/upload";
 WiFiClient client;
 const int maxRetries = 10; // Maximum number of retries
-const int retryDelay = 5000; // Delay between retries in milliseconds
+const int retryDelay = 30000; // Delay between retries in milliseconds
 
 void post_picture() {
   if (WiFi.status() == WL_CONNECTED) {

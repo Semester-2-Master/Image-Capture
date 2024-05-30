@@ -1,8 +1,8 @@
 #include <WiFi.h>
 
 
-const char* ssid     = "fablab";
-const char* password = "DoLeLa5831";
+const char* ssid     = "RUC-IOT";
+const char* password = "GiHa2703La";
 
 
 void init_wifi() {
@@ -13,8 +13,8 @@ void init_wifi() {
 
     WiFi.begin(ssid, password);
     // Will try for about 10 seconds (20x 500ms)
-    int tryDelay = 500;
-    int numberOfTries = 20;
+    int tryDelay = 5000;
+    
     // Wait for the WiFi event
     while (true) {
         switch(WiFi.status()) {
@@ -47,13 +47,5 @@ void init_wifi() {
         }
         delay(tryDelay);
         
-        if(numberOfTries <= 0){
-          Serial.print("[WiFi] Failed to connect to WiFi!");
-          // Use disconnect function to force stop trying to connect
-          WiFi.disconnect();
-          return;
-        } else {
-          numberOfTries--;
-        }
     }
 }

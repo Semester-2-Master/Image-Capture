@@ -20,12 +20,12 @@ void setup() {
 
   post_picture();
   delay(2000);
-  motor_step();
+  //motor_step();
   delay(30000);
 
     post_picture();
   delay(2000);
-  motor_step();
+  //motor_step();
   delay(30000);
   
     post_picture();
@@ -35,14 +35,19 @@ void setup() {
 
 }
 
+int counter =0;
+
 void loop() {
   //
   post_picture();
   delay(2000);
-  motor_step();
- // delay(30000);
- 
+  if(counter > 11){
+    motor_step();
+    counter = 0;
+  }
+  counter++;
 
+  
   delay(1800000);
 
   //delay(30000);
