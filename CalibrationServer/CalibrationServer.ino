@@ -23,8 +23,8 @@
 // ===========================
 
 
-const char* ssid     = "POCO M4 Pro 5G";
-const char* password = "bruh12345";
+const char* ssid     = "RUC-IOT";
+const char* password = "GiHa2703La";
 
 void startCameraServer();
 void setupLedFlash(int pin);
