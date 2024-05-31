@@ -43,7 +43,7 @@
   s->set_vflip(s, 1); // flip it back
   s->set_hmirror(s, 1);
   s->set_exposure_ctrl(s, 1); // Disable exposure control
-  s->set_ae_level(s, -2); // Set AE level to 0
+  s->set_ae_level(s, 0); // Set AE level to 0
   s->set_aec_value(s, 10); // Set AEC value to 0
   s->set_aec2(s, 0); // Disable additional auto exposure control
   s->set_gain_ctrl(s, 1); // Disable gain control
